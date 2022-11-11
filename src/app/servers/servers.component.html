@@ -1,0 +1,28 @@
+<app-server *ngFor=" let server of servers"></app-server>
+<success-alert></success-alert>
+<button class='btn btn-primary' [disabled]=!isServerAllowed (click)="oncreateServer()"> Button
+</button>
+<p> {{serverStatus}}</p>
+
+<label>Server Name</label>
+<input class="form-control" type="text" (input)="onUpdateServerName($event)">
+<input type="text" class="form-control" [(ngModel)]="serverName">
+<p> {{ serverName }} </p>
+
+
+<hr>
+
+<h2> --------Assignment of Data Binding-------- </h2>
+
+<input type="text" class="form-control" [(ngModel)]="username">
+<p *ngIf="isUserCreated; else noUser"> {{userStatus}} </p>
+<ng-template #noUser>
+    <p>No User was created!</p>
+</ng-template>
+<button class='btn btn-primary' [disabled]="username === ''" (click)="showUsername($event)"> Check Username </button>
+
+<button class='btn btn-danger' (click)="getPasscode()"> Display Details </button>
+<p *ngIf="isCodeCreated"> {{secretCode}} </p>
+<div *ngFor="let logItem of log; let i = index" [ngStyle]="{backgroundColor: i >= 4 ? 'green' : 'transparent'}"
+    [ngClass]="{'white-text':  i >= 4}"> {{logItem}}
+</div>
