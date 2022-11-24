@@ -1,17 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output } from '@angular/core';
 import { Recipe } from '../recipe.model';
+import { RecipeService } from '../recipe.service';
 @Component({
   selector: 'app-recipe-list',
   templateUrl: './recipe-list.component.html',
   styleUrls: ['./recipe-list.component.css']
 })
 export class RecipeListComponent implements OnInit {
+  recipes!: Recipe[];
 
-  recipes: Recipe[] = [
-    new Recipe('Test Recipe', 'Recipe Description', 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSyd0LJxe2agAj4xLXCr1V_rPIQkrEH8_3Akw&usqp=CAU')
-  ];
-  constructor() { }
-  ngOnInit(): void {
+  constructor(private recipeService: RecipeService) {
+
   }
 
+  ngOnInit(): void {
+    this.recipes = this.recipeService.getRecipes();
+  }
 }
